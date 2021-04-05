@@ -1,0 +1,46 @@
+{
+  "sap_cf_request_log": {
+    "title": "SAP CP - Cloud Foundry Request Metrics Log Format",
+    "description": "specification of the \"request metrics beat\" message type that captures all relevant information for both incoming and outgoing requests that are shipped among and processed by \"components\" (i.e. applications or services) running in a Cloud Foundry (CF) landscape",
+    "url": "https://github.com/SAP/cf-java-logging-support/blob/master/cf-java-logging-support-core/beats/request-metrics/etc/fields.yml",
+    "regex": {
+      "main": {
+        "pattern": "^(?<timestamp>\\d{4}-\\d{2}-\\d{2}T(\\d{2}[:.+-]){4}\\d{4}) \\[(?<log_origin>[\\w\\/]+)\\] (?<channel>\\w+) (?<jbody>.*)$"
+      }
+    },
+    "json": false,
+    "convert-to-local-time": true,
+    "timestamp-format": [
+      "%Y-%m-%dT%H:%M:%S",
+      "%Y-%m-%dT%H:%M:%S:%L%z"
+    ],
+    "value": {
+      "log_origin": {
+        "kind": "string",
+        "identifier": false
+      },
+      "channel": {
+        "kind": "string",
+        "identifier": true
+      },
+      "jbody": {
+        "kind": "json"
+      }
+    },
+    "line-format": [
+      {
+        "field": "__timestamp__",
+        "timestamp-format": "%Y-%m-%dT%H:%M:%S"
+      },
+      " ",
+      {
+        "field": "jbody"
+      }
+    ],
+    "sample": [
+      {
+        "line": "2021-04-05T19:17:58.89+0530 [APP/PROC/WEB/0] OUT {\"component_type\":\"application\",\"component_id\":\"e8058dfe-aca3-47d1-92c2-b6ec0069d53d\",\"component_name\":\"app-name\",\"component_instance\":0,\"layer\":\"[NODEJS]\",\"organization_name\":\"dummy-org\",\"organization_id\":\"a1f8430d-3810-49ea-a023-96d917cad653\",\"space_name\":\"dummy_space\",\"space_id\":\"b2545c36-56ba-48a4-b96b-9cef28a51030\",\"container_id\":\"127.0.0.1\",\"logger\":\"nodejs-logger\",\"source_instance\":0,\"written_at\":\"2021-04-05T13:47:58.894Z\",\"written_ts\":1617630478894979800,\"request_id\":\"-\",\"request_size_b\":-1,\"type\":\"request\",\"request\":\"/\",\"method\":\"GET\",\"remote_user\":\"-\",\"direction\":\"IN\",\"x_forwarded_for\":\"\",\"response_time_ms\":1,\"referer\":\"-\",\"correlation_id\":\"67b5816f-b0a6-4726-85cf-a54bdb7ea301\",\"tenant_id\":\"-\",\"tenant_subdomain\":\"-\",\"level\":\"info\",\"remote_host\":\"redacted\",\"remote_port\":\"redacted\",\"protocol\":\"HTTP/1.1\",\"remote_ip\":\"redacted\",\"request_received_at\":\"2021-04-05T13:47:58.894Z\",\"response_status\":200,\"response_size_b\":\"15\",\"response_content_type\":\"application/json; charset=utf-8\",\"response_sent_at\":\"2021-04-05T13:47:58.895Z\"}"
+      }
+    ]
+  }
+}
