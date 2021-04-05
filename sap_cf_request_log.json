@@ -1,4 +1,5 @@
 {
+  "$schema": "https://lnav.org/schemas/format-v1.schema.json",
   "sap_cf_request_log": {
     "title": "SAP CP - Cloud Foundry Request Metrics Log Format",
     "description": "specification of the \"request metrics beat\" message type that captures all relevant information for both incoming and outgoing requests that are shipped among and processed by \"components\" (i.e. applications or services) running in a Cloud Foundry (CF) landscape",
